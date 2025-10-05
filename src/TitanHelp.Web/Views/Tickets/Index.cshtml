@@ -1,0 +1,162 @@
+@model IEnumerable<TitanHelp.Application.DTOs.TicketDto>
+
+@{
+ ViewData["Title"] = "Help Desk Tickets";
+}
+
+<div class="container mt-4">
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h1 class="display-4">
+                <i class="bi bi-ticket-perforated"></i> Help Desk Tickets
+            </h1>
+            <p class="lead text-muted">Manage and track all support tickets</p>
+        </div>
+        <div class="col-md-4 text-end">
+            <a asp-action="Create" class="btn btn-primary btn-lg">
+                <i class="bi bi-plus-circle"></i> Create New Ticket
+            </a>
+        </div>
+    </div>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-check-circle-fill"></i> @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="bi bi-exclamation-triangle-fill"></i> @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info" role="alert">
+            <h4 class="alert-heading">No tickets found!</h4>
+            <p>There are currently no tickets in the system. Click "Create New Ticket" to get started.</p>
+        </div>
+    }
+    else
+    {
+        <div class="card shadow">
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead class="table-dark">
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Date Created</th>
+                                <th scope="col">Priority</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                            <tr>
+                                <td class="align-middle">
+                                    <strong>#@item.Id</strong>
+                                </td>
+                                <td class="align-middle">
+                                    <strong>@item.Name</strong>
+                                    <br />
+                                    <small class="text-muted">
+                                        @(item.ProblemDescription.Length > 50
+                                            ? item.ProblemDescription.Substring(0, 50) + "..."
+                                            : item.ProblemDescription)
+                                    </small>
+                                </td>
+                                <td class="align-middle">
+                                    <i class="bi bi-calendar3"></i>
+                                    @item.Date.ToString("MMM dd, yyyy")
+                                    <br />
+                                    <small class="text-muted">@item.Date.ToString("hh:mm tt")</small>
+                                </td>
+                                <td class="align-middle">
+                                    @if (item.Priority == "High")
+                                    {
+                                        <span class="badge bg-danger">
+                                            <i class="bi bi-exclamation-triangle-fill"></i> High
+                                        </span>
+                                    }
+                                    else if (item.Priority == "Medium")
+                                    {
+                                        <span class="badge bg-warning text-dark">
+                                            <i class="bi bi-exclamation-circle-fill"></i> Medium
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-info text-dark">
+                                            <i class="bi bi-info-circle-fill"></i> Low
+                                        </span>
+                                    }
+                                </td>
+                                <td class="align-middle">
+                                    @if (item.Status == "Open")
+                                    {
+                                        <span class="badge bg-success">
+                                            <i class="bi bi-circle-fill"></i> Open
+                                        </span>
+                                    }
+                                    else if (item.Status == "In Progress")
+                                    {
+                                        <span class="badge bg-primary">
+                                            <i class="bi bi-hourglass-split"></i> In Progress
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-secondary">
+                                            <i class="bi bi-check-circle-fill"></i> Closed
+                                        </span>
+                                    }
+                                </td>
+                                <td class="align-middle">
+                                    <div class="btn-group" role="group">
+                                        <a asp-action="Details" asp-route-id="@item.Id"
+                                            class="btn btn-sm btn-outline-info"
+                                            title="View Details">
+                                            <i class="bi bi-eye"></i>
+                                        </a>
+                                        <a asp-action="Edit" asp-route-id="@item.Id"
+                                            class="btn btn-sm btn-outline-primary"
+                                            title="Edit">
+                                            <i class="bi bi-pencil"></i>
+                                        </a>
+                                        <a asp-action="Delete" asp-route-id="@item.Id"
+                                            class="btn btn-sm btn-outline-danger"
+                                            title="Delete">
+                                            <i class="bi bi-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer text-muted">
+                <small>Total Tickets: <strong>@Model.Count()</strong></small>
+            </div>
+        </div>
+    }
+</div>
+    
+@section Scripts {
+    <script>
+        // Auto-dismiss alerts after 5 seconds
+        setTimeout(function() {
+            $('.alert').fadeOut('slow');
+        }, 5000);
+        </script>
+}

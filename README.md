@@ -2,48 +2,48 @@
 This repository is for the final project in course CEN 4031 with Professor Tillman. We are building a help desk ticket management system with layered architecture.
 
 ## Setup Project Structure
-[ ] Create solution file  
+[X] Create solution file  
 
-[ ] Create Data Access Layer project  
+[X] Create Data Access Layer project  
 
-[ ] Create Application Layer project  
+[X] Create Application Layer project  
 
-[ ] Create Presentation Layer project  
+[X] Create Presentation Layer project  
 
-[ ] Create Test projects  
+[X] Create Test projects  
 
-[ ] Configure project references
+[X] Configure project references
 
 ## Implement Data Access Layer
-[ ] Create Ticket entity  
+[X] Create Ticket entity  
 
-[ ] Create ApplicationDbContext  
+[X] Create ApplicationDbContext  
 
-[ ] Implement Repository pattern  
+[X] Implement Repository pattern  
 
-[ ] Create initial migration  
+[X] Create initial migration  
 
 [ ] Write unit tests
 
 ## Implement Business Logic Layer
-[ ] Create Data Transfer Objects (DTOs)  
+[X] Create Data Transfer Objects (DTOs)  
 
-[ ] Implement service interfaces  
+[X] Implement service interfaces  
 
-[ ] Implement TicketService  
+[X] Implement TicketService  
 
-[ ] Add validation logic  
+[X] Add validation logic  
 
 [ ] Write unit tests
 
 ## Implement Presentation Layer
-[ ] Create TicketController  
+[X] Create TicketController  
 
-[ ] Create ticket list view  
+[X] Create ticket list view  
 
-[ ] Create ticket creation form  
+[X] Create ticket creation form  
 
-[ ] Add client-side validation  
+[X] Add client-side validation  
 
 [ ] Write integration tests
 
