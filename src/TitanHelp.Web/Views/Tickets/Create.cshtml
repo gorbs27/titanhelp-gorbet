@@ -1,0 +1,140 @@
+@model TitanHelp.Application.DTOs.TicketDto
+
+@{
+ ViewData["Title"] = "Create New Ticket";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">
+                        <i class="bi bi-plus-circle"></i> Create New Support Ticket
+                    </h3>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Create" method="post" id="createTicketForm">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                        <div class="mb-4">
+                            <label asp-for="Name" class="form-label fw-bold">
+                                Ticket Name <span class="text-danger">*</span>
+                            </label>
+                            <input asp-for="Name"
+                                class="form-control form-control-lg"
+                                placeholder="Brief description of the issue"
+                                maxlength="100"
+                                required />
+                            <span asp-validation-for="Name" class="text-danger small"></span>
+                            <div class="form-text">
+                                <small id="nameCounter" class="text-muted">0 / 100 characters</small>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label asp-for="Priority" class="form-label fw-bold">
+                                Priority Level <span class="text-danger">*</span>
+                            </label>
+                            <select asp-for="Priority" class="form-select form-select-lg" required>
+                                <option value="">-- Select Priority --</option>
+                                <option value="Low">Low - Can wait</option>
+                                <option value="Medium" selected>Medium - Normal response time</option>
+                                <option value="High">High - Urgent attention needed</option>
+                            </select>
+                            <span asp-validation-for="Priority" class="text-danger small"></span>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label asp-for="ProblemDescription" class="form-label fw-bold">
+                                Problem Description <span class="text-danger">*</span>
+                            </label>
+                            <textarea asp-for="ProblemDescription"
+                                class="form-control"
+                                rows="6"
+                                placeholder="Please provide detailed information about the issue you're experiencing..."
+                                maxlength="1000"
+                                required></textarea>
+                            <span asp-validation-for="ProblemDescription" class="text-danger small"></span>
+                            <div class="form-text">
+                                <small id="descCounter" class="text-muted">0 / 1000 characters</small>
+                            </div>
+                        </div>
+                        
+                        <div class="alert alert-info" role="alert">
+                            <i class="bi bi-info-circle-fill"></i>
+                            <strong>Note:</strong> The ticket will be created with status "Open" and the current date/time will be au
+                        </div>
+                        
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a asp-action="Index" class="btn btn-secondary btn-lg">
+                                <i class="bi bi-x-circle"></i> Cancel
+                            </a>
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="bi bi-check-circle"></i> Create Ticket
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        // Character counter for Name field
+        const nameInput = document.querySelector('input[name="Name"]');
+        const nameCounter = document.getElementById('nameCounter');
+
+        nameInput.addEventListener('input', function () {
+            const length = this.value.length;
+            nameCounter.textContent = length + ' / 100 characters';
+
+            if (length > 90) {
+                nameCounter.classList.add('text-danger');
+                nameCounter.classList.remove('text-muted');
+            }
+            else
+            {
+                nameCounter.classList.add('text-muted');
+                nameCounter.classList.remove('text-danger');
+            }
+        });
+
+        // Character counter for Description field
+        const descInput = document.querySelector('textarea[name="ProblemDescription"]');
+        const descCounter = document.getElementById('descCounter');
+
+        descInput.addEventListener('input', function () {
+            const length = this.value.length;
+            descCounter.textContent = length + ' / 1000 characters';
+
+               if (length > 950) {
+                   descCounter.classList.add('text-danger');
+                   descCounter.classList.remove('text-muted');
+               }
+               else
+               {
+                   descCounter.classList.add('text-muted');
+                   descCounter.classList.remove('text-danger');
+                }
+        });
+
+    // Form validation
+    (function () {
+        'use strict'
+        const form = document.getElementById('createTicketForm');
+
+        form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+        }, false);
+    })();
+    </script>
+}
