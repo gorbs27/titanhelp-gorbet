@@ -144,7 +144,7 @@ namespace TitanHelp.Web.Controllers
         // POST: Tickets/Edit/x
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Date,ProblemDescription,Status,Priority")]) TicketDto
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Date,ProblemDescription,Status,Priority")]) TicketDto ticket)
         {
             if (id != ticket.Id)
             {
