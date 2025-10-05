@@ -17,10 +17,6 @@ namespace TitanHelp.Web.Controllers
             _ticketService = ticketService;
             _logger = logger;
         }
-            {
-                _ticketService = ticketService;
-                _logger = logger;
-            }
 
         // GET: Tickets
         // Displays all tickets in a table format
@@ -149,7 +145,6 @@ namespace TitanHelp.Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Date,ProblemDescription,Status,Priority")]) TicketDto
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Date,ProblemDescription,Status,Priority")] TicketDto
         {
             if (id != ticket.Id)
             {
