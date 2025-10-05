@@ -13,6 +13,10 @@ namespace TitanHelp.Web.Controllers
             ITicketService ticketService,
             ILogger<TicketsController> logger)
 
+        {
+            _ticketService = ticketService;
+            _logger = logger;
+        }
             {
                 _ticketService = ticketService;
                 _logger = logger;
@@ -144,6 +148,7 @@ namespace TitanHelp.Web.Controllers
         // POST: Tickets/Edit/x
         [HttpPost]
         [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Date,ProblemDescription,Status,Priority")]) TicketDto
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Date,ProblemDescription,Status,Priority")] TicketDto
         {
             if (id != ticket.Id)
