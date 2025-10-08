@@ -1,61 +1,81 @@
-# titanhelp-gorbet
-This repository is for the final project in course CEN 4031 with Professor Tillman. We are building a help desk ticket management system with layered architecture.
+# 🛠️ TitanHelp
 
-## Setup Project Structure
-[X] Create solution file  
+TitanHelp is a layered help desk ticket management system built for the CEN 4031 course at St. Petersburg College. It streamlines the process of creating, tracking, and resolving support tickets using a clean architecture and modern .NET technologies.
 
-[X] Create Data Access Layer project  
+## 📦 Table of Contents
 
-[X] Create Application Layer project  
+- [Features](#features)
+- [Architecture](#architecture)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
 
-[X] Create Presentation Layer project  
+---
 
-[X] Create Test projects  
+## ✨ Features
 
-[X] Configure project references
+- Create, view, and manage support tickets
+- Layered architecture: Presentation, Business Logic, Data Access
+- ASP.NET Core MVC frontend
+- Entity Framework Core with SQLite backend
+- DTOs and service interfaces for clean separation
+- Client-side and server-side validation
 
-## Implement Data Access Layer
-[X] Create Ticket entity  
+---
 
-[X] Create ApplicationDbContext  
+## 🏗️ Architecture
 
-[X] Implement Repository pattern  
+TitanHelp follows a **three-layered architecture**:
 
-[X] Create initial migration  
+Presentation Layer (ASP.NET Core MVC)  
+↓  
+Business Logic Layer (Services, DTOs)  
+↓  
+Data Access Layer (EF Core, Repositories)  
 
-[ ] Write unit tests
 
-## Implement Business Logic Layer
-[X] Create Data Transfer Objects (DTOs)  
+- **Presentation Layer**: Handles user interaction via controllers and views.
+- **Business Logic Layer**: Contains services and validation logic.
+- **Data Access Layer**: Manages database operations using EF Core and SQLite.
 
-[X] Implement service interfaces  
+---
 
-[X] Implement TicketService  
+## 🧰 Tech Stack
 
-[X] Add validation logic  
+| Layer              | Technology             |
+|-------------------|------------------------|
+| Framework          | .NET                   |
+| Presentation       | ASP.NET Core MVC       |
+| ORM                | Entity Framework Core  |
+| Database           | SQLite                 |
+| Testing            | MSTest                 |
+| Mocking            | Moq                    |
 
-[ ] Write unit tests
+---
 
-## Implement Presentation Layer
-[X] Create TicketController  
+## 🚀 Getting Started
 
-[X] Create ticket list view  
+### Prerequisites
 
-[X] Create ticket creation form  
+- [.NET SDK](https://dotnet.microsoft.com/download)
+- [Visual Studio](https://visualstudio.microsoft.com/) or VS Code
 
-[X] Add client-side validation  
+### Installation
 
-[ ] Write integration tests
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/gorbs27/titanhelp-gorbet.git
+   cd titanhelp-gorbet
+   
+2. Restore dependencies:
+   dotnet restore
 
-## Technology Stack
-Framework: .NET  
+3. Build solution:
+   dotnet build
 
-Presentation: ASP.NET Core MVC  
+4. Apply migrations and update the database:
+   dotnet ef database update
 
-ORM: Entity Framework Core  
+5. Run the application:
+   dotnet run
 
-Database: SQLite  
-
-Testing: MSTest  
-
-Mocking: Moq
+Use your web browser to navigate to http://localhost:5000
